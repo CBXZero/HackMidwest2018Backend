@@ -8,10 +8,11 @@ using HackMidwest2018Backend.DatabaseModels;
         {
             public DbSet<Event> Events { get; set; }
             public DbSet<Contact> Contacts { get; set; }
+            public DbSet<Schedule> Schedules {get; set;}
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder.UseSqlite("Data Source=blogging.db");
+                optionsBuilder.UseSqlite("Data Source=partyPlanner.db");
             }
         }
   }
