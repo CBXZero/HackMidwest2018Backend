@@ -20,5 +20,7 @@ namespace HackMidwest2018Backend
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+                //.PreferHostingUrls()
+                //.UseUrls("https://localhost:4000");
     }
 }
