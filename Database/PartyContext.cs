@@ -18,13 +18,13 @@ namespace HackMidwest2018Backend.DatabaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Contact>().HasData(
-                                new Contact
-                                {
-                                    ContactId = 1,
-                                    FirstName = "Teddy",
-                                    LastName = "Ivarock",
-                                    PhoneNumber = "5555555555"
-                                }
+                new Contact
+                {
+                    ContactId = 1,
+                    FirstName = "Teddy",
+                    LastName = "Ivarock",
+                    PhoneNumber = "5555555555"
+                }
             );
 
             modelBuilder.Entity<Event>().HasData(
