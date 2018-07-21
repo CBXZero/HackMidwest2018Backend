@@ -2,44 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HackMidwest2018Backend.DatabaseContext;
 using Microsoft.AspNetCore.Mvc;
+using GraphQL;
+using GraphQL.Types;
+
 
 namespace HackMidwest2018Backend.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
+    [Route("api/[controller]")] 
+    public class GraphQLController : Controller
     {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        private readonly IDocumentExecuter _documentExecuter;
+        private readonly ISchema _schema;
+
+        public GraphQLController(ISchema schema, IDocumentExecuter documentExecuter)
         {
-            return new string[] { "value1", "value2" };
+            _schema = schema;
+            _documentExecuter = documentExecuter;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post()
         {
-        }
+            //if (query == null) { throw new ArgumentNullException(nameof(query)); }
+            //var inputs = query.Variables.ToInputs();
+            var executionOptions = new ExecutionOptions
+            {
+                Schema = _schema,
+                Query = @"query {
+                            event {
+                                eventId
+                            }
+                        }",
+            };
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+            var result = await _documentExecuter.ExecuteAsync(executionOptions).ConfigureAwait(false);
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            if (result.Errors?.Count > 0)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
         }
     }
 }

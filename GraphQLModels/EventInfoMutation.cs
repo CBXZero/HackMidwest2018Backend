@@ -1,21 +1,20 @@
 using GraphQL.Types;
 using GraphQLModels;
+using HackMidwest2018Backend.DatabaseContext;
 
 public class EventInfoMutation : ObjectGraphType
     {
-        public EventInfoMutation(IPlayerRepository playerRepository)
+        public EventInfoMutation(PartyContext context)
         {
-            Field<EventType>(
-                "player",
-                arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "id" }),
-                resolve: context =>  playerRepository.Get(context.GetArgument<int>("id")));
-
-            Field<EventType>(
-                "randomPlayer",
-                resolve: context => playerRepository.GetRandom());
-
-            Field<ListGraphType<EventType>>(
-                "players",
-                resolve: context => playerRepository.All());
+            //  Field<EventType>(
+            //     "createEvent",
+            //     arguments: new QueryArguments(
+            //         new QueryArgument<NonNullGraphType<EventInputType>> { Name = "event" }
+            //     ),
+            //     resolve: fieldContext =>
+            //     {
+            //         var player = context.GetArgument<Player>("player");
+            //         return playerRepository.Add(player);
+            //     });
         }
     }

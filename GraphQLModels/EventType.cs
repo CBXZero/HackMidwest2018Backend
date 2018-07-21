@@ -7,7 +7,7 @@ namespace GraphQLModels {
     {
         public EventType(PartyContext context)
         {
-            Field(x => x.Id);
+            Field(x => x.EventId);
             Field(x => x.Name);
             Field(x => x.Description);
             Field(x => x.Owner);

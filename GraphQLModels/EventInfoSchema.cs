@@ -1,10 +1,16 @@
 using GraphQL;
 using GraphQL.Types;
+using GraphQLModels;
+using HackMidwest2018Backend.DatabaseContext;
 public class EventInfoSchema : Schema
 {
-    public EventInfoSchema(IDependencyResolver resolver): base(resolver)
+    
+    public EventInfoSchema()
     {
-        Query = resolver.Resolve<EventInfoQuery>();
-        Mutation = resolver.Resolve<EventInfoMutation>();
+        PartyContext db = new PartyContext();
+        Query = new EventInfoQuery(db);
+        RegisterType<EventType>();
+
+        //Mutation = EventInfoMutation();
     }
 }
