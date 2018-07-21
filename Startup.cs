@@ -41,7 +41,7 @@ namespace HackMidwest2018Backend
                 app.UseHsts();
             }
 
-            app.UseGraphiQl();
+            app.UseGraphiQl("api/graphql");
             app.UseHttpsRedirection();
             app.UseMvc();
         }

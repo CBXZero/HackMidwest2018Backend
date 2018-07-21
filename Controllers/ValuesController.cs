@@ -7,52 +7,34 @@ using Microsoft.AspNetCore.Mvc;
 using GraphQL;
 using GraphQL.Types;
 using HackMidwest2018Backend.DatabaseModels;
+using Newtonsoft.Json.Linq;
 
 namespace HackMidwest2018Backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("graphql")]
     public class GraphQLController : Controller
     {
 
         [HttpPost]
-        public async Task<IActionResult> Post()
+        public async Task<IActionResult> Post([FromBody]GraphQLRequest request)
         {
-            //if (query == null) { throw new ArgumentNullException(nameof(query)); }
-            //var inputs = query.Variables.ToInputs();
-            // var executionOptions = new ExecutionOptions
-            // {
-            //     Schema = new Schema { Query = new EventInfoQuery(new PartyContext()) },
-            //     Query = @"query {
-            //                 event {
-            //                     eventId
-            //                 }
-            //             }",
-            // };
-
-            // var result = await new DocumentExecuter().ExecuteAsync(executionOptions).ConfigureAwait(false);
-
-            // if (result.Errors?.Count > 0)
-            // {
-            //     return BadRequest(result);
-            // }
-
             var schema = new Schema { Query = new EventQuery() };
 
             var result = await new DocumentExecuter().ExecuteAsync(_ =>
            {
                _.Schema = schema;
-               _.Query = @"
-                query {
-                  event {
-                    eventId
-                    name
-                    description
-                  }
-                }
-              ";
+               _.Query = request.Query;
+               _.Inputs = request.Variables.ToInputs();
            }).ConfigureAwait(false);
 
             return Ok(result);
         }
+    }
+
+    public class GraphQLRequest
+    {
+        public string OperationName { get; set; }
+        public string Query { get; set; }
+        public JObject Variables { get; set; }
     }
 }
