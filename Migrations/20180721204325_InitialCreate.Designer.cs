@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackMidwest2018Backend.Migrations
 {
     [DbContext(typeof(PartyContext))]
-    [Migration("20180721193359_AddEventAndModels")]
-    partial class AddEventAndModels
+    [Migration("20180721204325_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799");
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846");
 
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Contact", b =>
                 {
@@ -38,27 +38,57 @@ namespace HackMidwest2018Backend.Migrations
 
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Event", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("EventId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("OwnerContactId");
+                    b.Property<int>("OwnerContactId");
 
-                    b.HasKey("Id");
+                    b.HasKey("EventId");
 
                     b.HasIndex("OwnerContactId");
 
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Schedule", b =>
+                {
+                    b.Property<int>("ScheduleId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("EventId");
+
+                    b.Property<int?>("ScheduleId1");
+
+                    b.HasKey("ScheduleId");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("ScheduleId1");
+
+                    b.ToTable("Schedules");
+                });
+
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Event", b =>
                 {
                     b.HasOne("HackMidwest2018Backend.DatabaseModels.Contact", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerContactId");
+                        .HasForeignKey("OwnerContactId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Schedule", b =>
+                {
+                    b.HasOne("HackMidwest2018Backend.DatabaseModels.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId");
+
+                    b.HasOne("HackMidwest2018Backend.DatabaseModels.Schedule")
+                        .WithMany("Schedules")
+                        .HasForeignKey("ScheduleId1");
                 });
 #pragma warning restore 612, 618
         }
