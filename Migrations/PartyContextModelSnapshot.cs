@@ -32,24 +32,32 @@ namespace HackMidwest2018Backend.Migrations
                     b.HasKey("ContactId");
 
                     b.ToTable("Contacts");
+
+                    b.HasData(
+                        new { ContactId = 1, FirstName = "Teddy", LastName = "Ivarock", PhoneNumber = "5555555555" }
+                    );
                 });
 
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Event", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("EventId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("OwnerContactId");
+                    b.Property<int>("OwnerContactId");
 
-                    b.HasKey("Id");
+                    b.HasKey("EventId");
 
                     b.HasIndex("OwnerContactId");
 
                     b.ToTable("Events");
+
+                    b.HasData(
+                        new { EventId = 1, Description = "I'm lonely and need a party", Name = "Teddy's house warming", OwnerContactId = 1 }
+                    );
                 });
 
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Schedule", b =>
@@ -74,7 +82,8 @@ namespace HackMidwest2018Backend.Migrations
                 {
                     b.HasOne("HackMidwest2018Backend.DatabaseModels.Contact", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerContactId");
+                        .HasForeignKey("OwnerContactId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Schedule", b =>

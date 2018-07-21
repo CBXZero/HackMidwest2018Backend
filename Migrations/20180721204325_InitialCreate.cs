@@ -2,7 +2,7 @@
 
 namespace HackMidwest2018Backend.Migrations
 {
-    public partial class AddEventAndModels : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,20 +26,46 @@ namespace HackMidwest2018Backend.Migrations
                 name: "Events",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    EventId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    OwnerContactId = table.Column<int>(nullable: true)
+                    OwnerContactId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Events", x => x.Id);
+                    table.PrimaryKey("PK_Events", x => x.EventId);
                     table.ForeignKey(
                         name: "FK_Events_Contacts_OwnerContactId",
                         column: x => x.OwnerContactId,
                         principalTable: "Contacts",
                         principalColumn: "ContactId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Schedules",
+                columns: table => new
+                {
+                    ScheduleId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    EventId = table.Column<int>(nullable: true),
+                    ScheduleId1 = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Schedules", x => x.ScheduleId);
+                    table.ForeignKey(
+                        name: "FK_Schedules_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
+                        principalColumn: "EventId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Schedules_Schedules_ScheduleId1",
+                        column: x => x.ScheduleId1,
+                        principalTable: "Schedules",
+                        principalColumn: "ScheduleId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -47,10 +73,23 @@ namespace HackMidwest2018Backend.Migrations
                 name: "IX_Events_OwnerContactId",
                 table: "Events",
                 column: "OwnerContactId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Schedules_EventId",
+                table: "Schedules",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Schedules_ScheduleId1",
+                table: "Schedules",
+                column: "ScheduleId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Schedules");
+
             migrationBuilder.DropTable(
                 name: "Events");
 
