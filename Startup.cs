@@ -40,6 +40,7 @@ namespace HackMidwest2018Backend
                 app.UseHsts();
             }
 
+            app.UseGraphiQl();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
