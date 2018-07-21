@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using HackMidwest2018Backend.DatabaseModels;
+
   namespace HackMidwest2018Backend.DatabaseContext
   {
         public class PartyContext : DbContext
         {
-            // public DbSet<Blog> Blogs { get; set; }
-            // public DbSet<Post> Posts { get; set; }
+            public DbSet<Event> Events { get; set; }
+            public DbSet<Contact> Contacts { get; set; }
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
