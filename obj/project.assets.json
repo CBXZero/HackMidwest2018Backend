@@ -2,9 +2,20 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-<<<<<<< HEAD
-      "Microsoft.AspNet.WebApi.Client/5.2.4": {
-=======
+      "GraphiQL/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "2.0.1",
+          "Microsoft.AspNetCore.StaticFiles": "2.0.1",
+          "Microsoft.Extensions.FileProviders.Embedded": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/GraphiQL.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/GraphiQL.dll": {}
+        }
+      },
       "GraphQL/0.17.3": {
         "type": "package",
         "dependencies": {
@@ -33,8 +44,7 @@
           "lib/netstandard1.1/GraphQL-Parser.dll": {}
         }
       },
-      "Microsoft.AspNet.WebApi.Client/5.2.6": {
->>>>>>> 8ac0fb49426e6c181d104dbdfc0e11c4ab86680d
+      "Microsoft.AspNet.WebApi.Client/5.2.4": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "10.0.1",
@@ -1727,13 +1737,10 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll": {}
         }
       },
-<<<<<<< HEAD
-      "Microsoft.EntityFrameworkCore.SqlServer/2.1.0": {
-=======
-      "Microsoft.EntityFrameworkCore.Sqlite/2.1.1": {
+      "Microsoft.EntityFrameworkCore.Sqlite/2.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Sqlite.Core": "2.1.1",
+          "Microsoft.EntityFrameworkCore.Sqlite.Core": "2.1.0",
           "SQLitePCLRaw.bundle_green": "1.1.11"
         },
         "compile": {
@@ -1743,11 +1750,11 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Sqlite.Core/2.1.1": {
+      "Microsoft.EntityFrameworkCore.Sqlite.Core/2.1.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Data.Sqlite.Core": "2.1.0",
-          "Microsoft.EntityFrameworkCore.Relational": "2.1.1"
+          "Microsoft.EntityFrameworkCore.Relational": "2.1.0"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Sqlite.dll": {}
@@ -1756,8 +1763,7 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Sqlite.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.SqlServer/2.1.1": {
->>>>>>> 8ac0fb49426e6c181d104dbdfc0e11c4ab86680d
+      "Microsoft.EntityFrameworkCore.SqlServer/2.1.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "2.1.0",
@@ -4531,10 +4537,16 @@
     }
   },
   "libraries": {
-<<<<<<< HEAD
-    "Microsoft.AspNet.WebApi.Client/5.2.4": {
-      "sha512": "OdBVC2bQWkf9qDd7Mt07ev4SwIdu6VmLBMTWC0D5cOP/HWSXyv/77otwtXVrAo42duNjvXOjzjP5oOI9m1+DTQ==",
-=======
+    "GraphiQL/1.1.0": {
+      "sha512": "VjWZZGUuSTHVQ+MTjpO15TTgcteqlshwSl7r7lJj35E59BFLc3OPO7UiDfJInFegtyqbsqu+Wq0V2D3SMyWpYg==",
+      "type": "package",
+      "path": "graphiql/1.1.0",
+      "files": [
+        "graphiql.1.1.0.nupkg.sha512",
+        "graphiql.nuspec",
+        "lib/netstandard2.0/GraphiQL.dll"
+      ]
+    },
     "GraphQL/0.17.3": {
       "sha512": "OKqDDo1foDvhaXVgaCs5OJFYEkMtfgM1zaWRLFSibQQV7GmP5nSVonXD9EvoRBISlprYcICoeOa3qzW89LSnJw==",
       "type": "package",
@@ -4557,9 +4569,8 @@
         "lib/netstandard1.1/GraphQL-Parser.dll"
       ]
     },
-    "Microsoft.AspNet.WebApi.Client/5.2.6": {
-      "sha512": "rMDlyePoxggkmN/qgha1+BR2Uy+dOr38xKCQOPfVNKGY07R2nYJGMTKJFE1XFgwD70RYUNazf2fqutjJF18XgQ==",
->>>>>>> 8ac0fb49426e6c181d104dbdfc0e11c4ab86680d
+    "Microsoft.AspNet.WebApi.Client/5.2.4": {
+      "sha512": "OdBVC2bQWkf9qDd7Mt07ev4SwIdu6VmLBMTWC0D5cOP/HWSXyv/77otwtXVrAo42duNjvXOjzjP5oOI9m1+DTQ==",
       "type": "package",
       "path": "microsoft.aspnet.webapi.client/5.2.4",
       "files": [
@@ -5950,36 +5961,31 @@
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
-<<<<<<< HEAD
-    "Microsoft.EntityFrameworkCore.SqlServer/2.1.0": {
-      "sha512": "5pW/jbSlujgbE4HCZ5mFHXOJ+hhjwZukbmDI2VMNXNODXtUCFNSudsrTtJg3V3WZGHChnLVCrzFBJBPPkW9pBg==",
-=======
-    "Microsoft.EntityFrameworkCore.Sqlite/2.1.1": {
-      "sha512": "cTMakmkRM9NK5I4dQVK9/HU3ZaYqBugQxUs9ENsHNqnY143p//j2VMKhWAWgIsefYlrf9/V4r7RWqgemNIX60A==",
+    "Microsoft.EntityFrameworkCore.Sqlite/2.1.0": {
+      "sha512": "pkgsmi4Qqhv0UBLy4F7BAjCG9T8DRbsEciYdz2y1LmIkdc83bGVzjFDTBcs9WF1X2zsvS9v89GafVrI1ua0x4w==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlite/2.1.1",
+      "path": "microsoft.entityframeworkcore.sqlite/2.1.0",
       "files": [
         ".signature.p7s",
         "lib/netstandard2.0/_._",
-        "microsoft.entityframeworkcore.sqlite.2.1.1.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlite.2.1.0.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlite.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Sqlite.Core/2.1.1": {
-      "sha512": "h13jyRhOoZnnpCxo4MSVvOmYWd+Ug6SenUi4x0H0BUGFngO9Fl4N8dTA9biSZ31q281NNU9jGwtkY8w46X/j9g==",
+    "Microsoft.EntityFrameworkCore.Sqlite.Core/2.1.0": {
+      "sha512": "wGbA0y52RPLXL25615M2soi2ggbbNJy5cUZfTa0AJJa0iSIQPiNGpeJOlxfPyjF9dAbt3di4+W4DULa39sYgJg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlite.core/2.1.1",
+      "path": "microsoft.entityframeworkcore.sqlite.core/2.1.0",
       "files": [
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Sqlite.dll",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Sqlite.xml",
-        "microsoft.entityframeworkcore.sqlite.core.2.1.1.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlite.core.2.1.0.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlite.core.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.SqlServer/2.1.1": {
-      "sha512": "+owJ/RcmFOrRseb+9PEjqhoOcE7l+DeTe0Jwte0tqhYoiPxZpC6jtGhUhpftPSBkC662siPR7kNm2TfxpPVilQ==",
->>>>>>> 8ac0fb49426e6c181d104dbdfc0e11c4ab86680d
+    "Microsoft.EntityFrameworkCore.SqlServer/2.1.0": {
+      "sha512": "5pW/jbSlujgbE4HCZ5mFHXOJ+hhjwZukbmDI2VMNXNODXtUCFNSudsrTtJg3V3WZGHChnLVCrzFBJBPPkW9pBg==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.sqlserver/2.1.0",
       "files": [
@@ -10423,6 +10429,8 @@
       "type": "package",
       "path": "system.runtime.serialization.xml/4.3.0",
       "files": [
+        "System.Runtime.Serialization.Xml.4.3.0.nupkg.sha512",
+        "System.Runtime.Serialization.Xml.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -10483,9 +10491,7 @@
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "system.runtime.serialization.xml.4.3.0.nupkg.sha512",
-        "system.runtime.serialization.xml.nuspec"
+        "ref/xamarinwatchos10/_._"
       ]
     },
     "System.Security.AccessControl/4.5.0": {
@@ -11893,15 +11899,12 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-<<<<<<< HEAD
-      "Microsoft.AspNetCore.App >= 2.1.0",
-=======
       "GraphQL >= 0.17.3",
-      "Microsoft.AspNetCore.App >= 2.1.1",
-      "Microsoft.EntityFrameworkCore.Design >= 2.1.1",
-      "Microsoft.EntityFrameworkCore.Sqlite >= 2.1.1",
->>>>>>> 8ac0fb49426e6c181d104dbdfc0e11c4ab86680d
-      "Microsoft.NETCore.App >= 2.1.0"
+      "Microsoft.AspNetCore.App >= 2.1.0",
+      "Microsoft.EntityFrameworkCore.Design >= 2.1.0",
+      "Microsoft.EntityFrameworkCore.Sqlite >= 2.1.0",
+      "Microsoft.NETCore.App >= 2.1.0",
+      "graphiql >= 1.1.0"
     ]
   },
   "packageFolders": {
@@ -11959,16 +11962,20 @@
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "target": "Package",
-            "version": "[2.1.1, )"
+            "version": "[2.1.0, )"
           },
           "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",
-            "version": "[2.1.1, )"
+            "version": "[2.1.0, )"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
+          },
+          "graphiql": {
+            "target": "Package",
+            "version": "[1.1.0, )"
           }
         },
         "imports": [
