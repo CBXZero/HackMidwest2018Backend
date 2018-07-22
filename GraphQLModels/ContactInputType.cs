@@ -10,6 +10,5 @@ public class ContactInputType : InputObjectGraphType
         Field<NonNullGraphType<StringGraphType>>("LastName");
         Field<NonNullGraphType<StringGraphType>>("Email");
         Field<NonNullGraphType<StringGraphType>>("PhoneNumber");
-        Field<ListGraphType<EventInputType>>("OwnedEvents");
     }
 } 
