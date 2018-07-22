@@ -12,6 +12,7 @@ namespace GraphQLModels {
             Field(x => x.PhoneNumber);
             Field(x => x.ContactId);
             Field(x => x.Email);
+            Field(x => x.OwnedEvents, type: typeof(ListGraphType<EventType>));
         }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackMidwest2018Backend.Migrations
 {
     [DbContext(typeof(PartyContext))]
-    [Migration("20180722042630_create")]
+    [Migration("20180722053517_create")]
     partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,11 +72,21 @@ namespace HackMidwest2018Backend.Migrations
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("BringAFriend");
+
                     b.Property<string>("Description");
+
+                    b.Property<string>("DressCode");
+
+                    b.Property<string>("Location");
 
                     b.Property<int>("OwnerContactId");
 
+                    b.Property<bool>("PublicEvent");
+
                     b.Property<string>("Title");
+
+                    b.Property<string>("Website");
 
                     b.HasKey("EventId");
 
@@ -85,8 +95,8 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Events");
 
                     b.HasData(
-                        new { EventId = 2, Description = "I'm lonely and need a party", OwnerContactId = 1, Title = "Teddy's house warming" },
-                        new { EventId = 1, Description = "Party!", OwnerContactId = 2, Title = "Charlie Board gaming" }
+                        new { EventId = 2, BringAFriend = false, Description = "I'm lonely and need a party", OwnerContactId = 1, PublicEvent = false, Title = "Teddy's house warming" },
+                        new { EventId = 1, BringAFriend = false, Description = "Party!", OwnerContactId = 2, PublicEvent = false, Title = "Charlie Board gaming" }
                     );
                 });
 
@@ -94,6 +104,8 @@ namespace HackMidwest2018Backend.Migrations
                 {
                     b.Property<int>("ScheduleId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Chosen");
 
                     b.Property<DateTime>("EventDate");
 
@@ -106,7 +118,7 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 23, 26, 30, 119, DateTimeKind.Local), EventId = 1 }
+                        new { ScheduleId = 1, Chosen = false, EventDate = new DateTime(2018, 7, 22, 0, 35, 17, 138, DateTimeKind.Local), EventId = 1 }
                     );
                 });
 

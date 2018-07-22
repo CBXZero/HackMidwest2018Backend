@@ -32,6 +32,11 @@ namespace HackMidwest2018Backend.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
+                    Website = table.Column<string>(nullable: true),
+                    BringAFriend = table.Column<bool>(nullable: false),
+                    DressCode = table.Column<string>(nullable: true),
+                    PublicEvent = table.Column<bool>(nullable: false),
                     OwnerContactId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -73,7 +78,8 @@ namespace HackMidwest2018Backend.Migrations
                     ScheduleId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     EventDate = table.Column<DateTime>(nullable: false),
-                    EventId = table.Column<int>(nullable: false)
+                    EventId = table.Column<int>(nullable: false),
+                    Chosen = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,13 +104,13 @@ namespace HackMidwest2018Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Description", "OwnerContactId", "Title" },
-                values: new object[] { 2, "I'm lonely and need a party", 1, "Teddy's house warming" });
+                columns: new[] { "EventId", "BringAFriend", "Description", "DressCode", "Location", "OwnerContactId", "PublicEvent", "Title", "Website" },
+                values: new object[] { 2, false, "I'm lonely and need a party", null, null, 1, false, "Teddy's house warming", null });
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Description", "OwnerContactId", "Title" },
-                values: new object[] { 1, "Party!", 2, "Charlie Board gaming" });
+                columns: new[] { "EventId", "BringAFriend", "Description", "DressCode", "Location", "OwnerContactId", "PublicEvent", "Title", "Website" },
+                values: new object[] { 1, false, "Party!", null, null, 2, false, "Charlie Board gaming", null });
 
             migrationBuilder.InsertData(
                 table: "Contributions",
@@ -113,8 +119,8 @@ namespace HackMidwest2018Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Schedules",
-                columns: new[] { "ScheduleId", "EventDate", "EventId" },
-                values: new object[] { 1, new DateTime(2018, 7, 21, 23, 26, 30, 119, DateTimeKind.Local), 1 });
+                columns: new[] { "ScheduleId", "Chosen", "EventDate", "EventId" },
+                values: new object[] { 1, false, new DateTime(2018, 7, 22, 0, 35, 17, 138, DateTimeKind.Local), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contributions_EventId",

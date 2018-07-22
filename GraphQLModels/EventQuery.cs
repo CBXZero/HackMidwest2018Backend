@@ -13,28 +13,17 @@ namespace HackMidwest2018Backend.GraphQLModels
         {
             var db = new PartyContext();
 
-            // Field<EventType>(
-            //     "event",
-            //     arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "eventId" }),
-            //     resolve: context =>
-            //     {
-            //         var id = context.GetArgument<int>("eventId");
-            //         var objectId = (int)context.Arguments["eventId"];
-            //         return db.Events.FirstOrDefault(e => e.EventId == objectId);
-            //     }
-            // );
-
-            Field<EventType>(
+            Field<ListGraphType<EventType>>(
                 "event",
                 arguments: new QueryArguments(new QueryArgument<StringGraphType> { Name = "email" }),
                 resolve: context =>
                 {
-                    var id = context.GetArgument<string>("email");
+                    //var id = context.GetArgument<string>("email");
                     var objectId = (string)context.Arguments["email"];
                     return db.Events
                     .Include(e => e.Owner)
                     .Include(e => e.Schedules)
-                    .Include(e => e.Contributions).FirstOrDefault(e => e.Owner.Email == objectId);
+                    .Include(e => e.Contributions).Where(e => e.Owner.Email == objectId);
                 } 
             );
 
@@ -45,6 +34,21 @@ namespace HackMidwest2018Backend.GraphQLModels
                 .Include(e => e.Schedules)
                 .Include(e => e.Contributions)
                 .ToList()
+            );
+
+            Field<ContactType>(
+                "contact",
+                 arguments: new QueryArguments(new QueryArgument<StringGraphType> { Name = "email" }),
+                 resolve: context =>
+                 {
+                    var objectId = (string)context.Arguments["email"];
+                    return db.Contacts
+                        .Include(p => p.OwnedEvents)
+                        .ThenInclude(t => t.Contributions)
+                        .Include(t => t.OwnedEvents)
+                        .ThenInclude(p => p.Schedules)
+                        .FirstOrDefault(c => c.Email == objectId);
+                 }
             );
         }
     }
