@@ -17,6 +17,7 @@ namespace GraphQLModels {
         Field(x => x.DressCode);
         Field(x => x.PublicEvent);
         Field(x =>  x.Owner, type: typeof(ContactType));
+        Field(x => x.EventGuests, type: typeof(ListGraphType<EventGuestType>));
         Field(x => x.Schedules, type: typeof(ListGraphType<ScheduleType>));
         Field(x => x.Contributions, type: typeof(ListGraphType<ContrubutionType>));
       }

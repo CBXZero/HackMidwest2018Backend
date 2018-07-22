@@ -20,5 +20,6 @@ namespace HackMidwest2018Backend.DatabaseModels
         
         public List<Schedule> Schedules {get; set;}
         public List<Contribution> Contributions {get; set;}
+        public List<EventGuest> EventGuests {get; set;}
     }
 }

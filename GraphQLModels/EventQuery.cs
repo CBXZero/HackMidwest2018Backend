@@ -15,16 +15,30 @@ namespace HackMidwest2018Backend.GraphQLModels
 
             Field<ListGraphType<EventType>>(
                 "event",
-                arguments: new QueryArguments(new QueryArgument<StringGraphType> { Name = "email" }),
+                arguments: new QueryArguments(new QueryArgument<StringGraphType> { Name = "email" },
+                new QueryArgument<IntGraphType> { Name = "id" }),
                 resolve: context =>
                 {
-                    //var id = context.GetArgument<string>("email");
-                    var objectId = (string)context.Arguments["email"];
+                    if (context.Arguments.ContainsKey("id"))
+                    {
+                        var id = (int)context.Arguments["id"];
+
+                        return db.Events
+                            .Include(e => e.Contributions).Where(e => e.EventId == id)
+                            .Include(e => e.Owner)
+                            .Include(e => e.Schedules)
+                            .Include(p => p.EventGuests)
+                            .ThenInclude(p => p.Guest);
+                    }
+
+                    var email = (string)context.Arguments["email"];
                     return db.Events
                     .Include(e => e.Owner)
                     .Include(e => e.Schedules)
-                    .Include(e => e.Contributions).Where(e => e.Owner.Email == objectId);
-                } 
+                    .Include(e => e.Contributions).Where(e => e.Owner.Email == email)
+                    .Include(p => p.EventGuests)
+                    .ThenInclude(p => p.Guest);
+                }
             );
 
             Field<ListGraphType<EventType>>(
@@ -33,6 +47,8 @@ namespace HackMidwest2018Backend.GraphQLModels
                 .Include(e => e.Owner)
                 .Include(e => e.Schedules)
                 .Include(e => e.Contributions)
+                .Include(p => p.EventGuests)
+                .ThenInclude(p => p.Guest)
                 .ToList()
             );
 
@@ -41,13 +57,15 @@ namespace HackMidwest2018Backend.GraphQLModels
                  arguments: new QueryArguments(new QueryArgument<StringGraphType> { Name = "email" }),
                  resolve: context =>
                  {
-                    var objectId = (string)context.Arguments["email"];
-                    return db.Contacts
-                        .Include(p => p.OwnedEvents)
-                        .ThenInclude(t => t.Contributions)
-                        .Include(t => t.OwnedEvents)
-                        .ThenInclude(p => p.Schedules)
-                        .FirstOrDefault(c => c.Email == objectId);
+                     var objectId = (string)context.Arguments["email"];
+                     return db.Contacts
+                         .Include(p => p.OwnedEvents)
+                         .ThenInclude(t => t.Contributions)
+                         .Include(t => t.OwnedEvents)
+                         .ThenInclude(p => p.Schedules)
+                         .Include(p => p.GuestEvents)
+                         .ThenInclude(p => p.Event)
+                         .FirstOrDefault(c => c.Email == objectId);
                  }
             );
         }
