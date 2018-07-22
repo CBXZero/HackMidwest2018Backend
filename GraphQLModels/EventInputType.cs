@@ -9,6 +9,6 @@ public class EventInputType : InputObjectGraphType
         Name = "EventInput";
         Field<NonNullGraphType<StringGraphType>>("title");
         Field<StringGraphType>("description");
-        Field<NonNullGraphType<ContactInputType>>("owner");
+        Field<ContactInputType>("owner");
     }
 }
