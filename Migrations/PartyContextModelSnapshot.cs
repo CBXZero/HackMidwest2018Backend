@@ -149,11 +149,7 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-<<<<<<< HEAD
-                        new { ScheduleId = 1, Chosen = false, EventDate = new DateTime(2018, 7, 22, 3, 24, 11, 80, DateTimeKind.Local), EventId = 1 }
-=======
-                        new { ScheduleId = 1, Chosen = false, EventDate = new DateTime(2018, 7, 22, 3, 46, 16, 519, DateTimeKind.Local), EventId = 1 }
->>>>>>> 63b0b51d1fd55f0cc43874aad10f1b2ab21d03ce
+                        new { ScheduleId = 1, Chosen = false, EventDate = new DateTime(2018, 7, 22, 3, 52, 17, 352, DateTimeKind.Local), EventId = 1 }
                     );
                 });
 
