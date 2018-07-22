@@ -11,25 +11,20 @@ namespace HackMidwest2018Backend.GraphQLModels
     {
         public EventMutation()
         {
+            var db = new PartyContext();
+
             Field<EventType>(
                 "createEvent",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<EventInputType>> {Name = "human"}
+                    new QueryArgument<NonNullGraphType<EventInputType>> {Name = "event"}
                 ),
                 resolve: context =>
                 {
                     var ev = context.GetArgument<Event>("event");
+                    db.Events.Add(ev);
+                    db.SaveChanges();
                     return ev;
                 });
-        }
-}
-    public class EventInputType : InputObjectGraphType
-    {
-        public EventInputType()
-        {
-            Name = "EventInput";
-            Field<NonNullGraphType<StringGraphType>>("name");
-            Field<StringGraphType>("homePlanet");
         }
     }
 }

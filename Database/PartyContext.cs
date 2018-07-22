@@ -23,6 +23,10 @@ namespace HackMidwest2018Backend.DatabaseContext
             .WithMany(b => b.OwnedEvents)
             .HasForeignKey(p => p.OwnerContactId);
 
+            modelBuilder.Entity<Event>()
+            .Property(e => e.EventId)
+            .ValueGeneratedOnAdd();
+
             //Seeding database
             modelBuilder.Entity<Contact>().HasData(
                 new Contact

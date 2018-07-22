@@ -31,7 +31,8 @@ namespace HackMidwest2018Backend.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    OwnerContactId = table.Column<int>(nullable: false)
+                    OwnerContactId = table.Column<int>(nullable: false),
+                    ScheduleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,18 +77,18 @@ namespace HackMidwest2018Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Description", "Name", "OwnerContactId" },
-                values: new object[] { 1, "I'm lonely and need a party", "Teddy's house warming", 1 });
+                columns: new[] { "EventId", "Description", "Name", "OwnerContactId", "ScheduleId" },
+                values: new object[] { 1, "I'm lonely and need a party", "Teddy's house warming", 1, 0 });
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Description", "Name", "OwnerContactId" },
-                values: new object[] { 2, "Party!", "Charlie Board gaming", 2 });
+                columns: new[] { "EventId", "Description", "Name", "OwnerContactId", "ScheduleId" },
+                values: new object[] { 2, "Party!", "Charlie Board gaming", 2, 0 });
 
             migrationBuilder.InsertData(
                 table: "Schedules",
                 columns: new[] { "ScheduleId", "EventDate", "EventId" },
-                values: new object[] { 1, new DateTime(2018, 7, 21, 20, 59, 17, 716, DateTimeKind.Local), 1 });
+                values: new object[] { 1, new DateTime(2018, 7, 21, 21, 46, 1, 815, DateTimeKind.Local), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_OwnerContactId",

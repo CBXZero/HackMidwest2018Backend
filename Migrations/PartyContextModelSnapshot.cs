@@ -50,6 +50,8 @@ namespace HackMidwest2018Backend.Migrations
 
                     b.Property<int>("OwnerContactId");
 
+                    b.Property<int>("ScheduleId");
+
                     b.HasKey("EventId");
 
                     b.HasIndex("OwnerContactId");
@@ -57,8 +59,8 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Events");
 
                     b.HasData(
-                        new { EventId = 1, Description = "I'm lonely and need a party", Name = "Teddy's house warming", OwnerContactId = 1 },
-                        new { EventId = 2, Description = "Party!", Name = "Charlie Board gaming", OwnerContactId = 2 }
+                        new { EventId = 1, Description = "I'm lonely and need a party", Name = "Teddy's house warming", OwnerContactId = 1, ScheduleId = 0 },
+                        new { EventId = 2, Description = "Party!", Name = "Charlie Board gaming", OwnerContactId = 2, ScheduleId = 0 }
                     );
                 });
 
@@ -78,7 +80,7 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 20, 59, 17, 716, DateTimeKind.Local), EventId = 1 }
+                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 21, 46, 1, 815, DateTimeKind.Local), EventId = 1 }
                     );
                 });
 
@@ -93,7 +95,7 @@ namespace HackMidwest2018Backend.Migrations
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Schedule", b =>
                 {
                     b.HasOne("HackMidwest2018Backend.DatabaseModels.Event", "Event")
-                        .WithMany()
+                        .WithMany("Schedules")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
