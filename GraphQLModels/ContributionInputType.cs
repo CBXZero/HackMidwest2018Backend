@@ -8,7 +8,7 @@ public class ContributionInputType : InputObjectGraphType
     {
        Name = "ContributionInput";
        Field<StringGraphType>("Description");
-       Field<StringGraphType>("Contributor");
-       Field<EventInputType>("EventId");
+       Field<ContactInputType>("Contributor");
+       Field<IntGraphType>("EventId");
     }
 }
