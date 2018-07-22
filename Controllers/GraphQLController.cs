@@ -31,11 +31,4 @@ namespace HackMidwest2018Backend.Controllers
             return Ok(result);
         }
     }
-
-    public class GraphQLRequest
-    {
-        public string OperationName { get; set; }
-        public string Query { get; set; }
-        public JObject Variables { get; set; }
-    }
 }
