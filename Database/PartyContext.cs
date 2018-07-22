@@ -10,6 +10,7 @@ namespace HackMidwest2018Backend.DatabaseContext
         public DbSet<Event> Events { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Contribution> Contributions {get; set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,7 +28,12 @@ namespace HackMidwest2018Backend.DatabaseContext
             .HasOne(p => p.Event)
             .WithMany(b => b.Schedules)
             .HasForeignKey(p => p.EventId);
-            
+
+            modelBuilder.Entity<Contribution>()
+            .HasOne(p => p.Event)
+            .WithMany(b => b.Contributions)
+            .HasForeignKey(p => p.EventId);
+
             modelBuilder.Entity<Event>()
             .Property(e => e.EventId)
             .ValueGeneratedOnAdd();
@@ -46,21 +52,22 @@ namespace HackMidwest2018Backend.DatabaseContext
                     ContactId = 2,
                     FirstName = "Charlie L",
                     LastName = "Ivarock",
-                    PhoneNumber = "5555555555"
+                    PhoneNumber = "5555555555",
+                    Email = "tripleTheCharliTripleTheFun@gmail.com"
                 }
             );
 
             modelBuilder.Entity<Event>().HasData(
                 new Event
                 {
-                    EventId = 1,
+                    EventId = 2,
                     Name = "Teddy's house warming",
                     Description = "I'm lonely and need a party",
                     OwnerContactId = 1,
                 },
                 new Event
                 {
-                    EventId = 2,
+                    EventId = 1,
                     Name = "Charlie Board gaming",
                     Description = "Party!",
                     OwnerContactId = 2
@@ -73,6 +80,15 @@ namespace HackMidwest2018Backend.DatabaseContext
                     ScheduleId = 1,
                     EventId = 1,
                     EventDate = DateTime.Now
+                }
+            );
+
+             modelBuilder.Entity<Contribution>().HasData(
+                new Contribution
+                {
+                    ContributionId = 1,
+                    EventId = 1,
+                    Description = "10 pounds of ground beef"
                 }
             );
         }

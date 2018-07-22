@@ -13,31 +13,38 @@ namespace HackMidwest2018Backend.GraphQLModels
         {
             var db = new PartyContext();
 
-            Field<EventType>(
-                "event",
-                arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "eventId" }),
-                resolve: context =>
-                {
-                    var id = context.GetArgument<int>("eventId");
-                    var objectId = (int)context.Arguments["eventId"];
-                    return db.Events.FirstOrDefault(e => e.EventId == objectId);
-                }
-            );
-
             // Field<EventType>(
-            //     "eventOwner",
-            //     arguments: new QueryArguments(new QueryArgument<StringGraphType> { Name = "email" }),
+            //     "event",
+            //     arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "eventId" }),
             //     resolve: context =>
             //     {
-            //         var id = context.GetArgument<string>("email");
-            //         var objectId = (string)context.Arguments["email"];
-            //         return db.Events.FirstOrDefault(e => e.Owner.Email == objectId);
-            //     } 
+            //         var id = context.GetArgument<int>("eventId");
+            //         var objectId = (int)context.Arguments["eventId"];
+            //         return db.Events.FirstOrDefault(e => e.EventId == objectId);
+            //     }
             // );
+
+            Field<EventType>(
+                "event",
+                arguments: new QueryArguments(new QueryArgument<StringGraphType> { Name = "email" }),
+                resolve: context =>
+                {
+                    var id = context.GetArgument<string>("email");
+                    var objectId = (string)context.Arguments["email"];
+                    return db.Events
+                    .Include(e => e.Owner)
+                    .Include(e => e.Schedules)
+                    .Include(e => e.Contributions).FirstOrDefault(e => e.Owner.Email == objectId);
+                } 
+            );
 
             Field<ListGraphType<EventType>>(
               "events",
-              resolve: context => db.Events.Include(e => e.Owner).Include(e => e.Schedules).ToList()
+              resolve: context => db.Events
+                .Include(e => e.Owner)
+                .Include(e => e.Schedules)
+                .Include(e => e.Contributions)
+                .ToList()
             );
         }
     }

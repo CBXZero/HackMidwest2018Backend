@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackMidwest2018Backend.Migrations
 {
     [DbContext(typeof(PartyContext))]
-    [Migration("20180722024602_create")]
+    [Migration("20180722034335_create")]
     partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,29 @@ namespace HackMidwest2018Backend.Migrations
 
                     b.HasData(
                         new { ContactId = 1, FirstName = "Teddy", LastName = "Ivarock", PhoneNumber = "5555555555" },
-                        new { ContactId = 2, FirstName = "Charlie L", LastName = "Ivarock", PhoneNumber = "5555555555" }
+                        new { ContactId = 2, Email = "tripleTheCharliTripleTheFun@gmail.com", FirstName = "Charlie L", LastName = "Ivarock", PhoneNumber = "5555555555" }
+                    );
+                });
+
+            modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Contribution", b =>
+                {
+                    b.Property<int>("ContributionId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Contributer");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("EventId");
+
+                    b.HasKey("ContributionId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("Contributions");
+
+                    b.HasData(
+                        new { ContributionId = 1, Description = "10 pounds of ground beef", EventId = 1 }
                     );
                 });
 
@@ -52,8 +74,6 @@ namespace HackMidwest2018Backend.Migrations
 
                     b.Property<int>("OwnerContactId");
 
-                    b.Property<int>("ScheduleId");
-
                     b.HasKey("EventId");
 
                     b.HasIndex("OwnerContactId");
@@ -61,8 +81,8 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Events");
 
                     b.HasData(
-                        new { EventId = 1, Description = "I'm lonely and need a party", Name = "Teddy's house warming", OwnerContactId = 1, ScheduleId = 0 },
-                        new { EventId = 2, Description = "Party!", Name = "Charlie Board gaming", OwnerContactId = 2, ScheduleId = 0 }
+                        new { EventId = 2, Description = "I'm lonely and need a party", Name = "Teddy's house warming", OwnerContactId = 1 },
+                        new { EventId = 1, Description = "Party!", Name = "Charlie Board gaming", OwnerContactId = 2 }
                     );
                 });
 
@@ -82,8 +102,16 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 21, 46, 1, 815, DateTimeKind.Local), EventId = 1 }
+                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 22, 43, 35, 753, DateTimeKind.Local), EventId = 1 }
                     );
+                });
+
+            modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Contribution", b =>
+                {
+                    b.HasOne("HackMidwest2018Backend.DatabaseModels.Event", "Event")
+                        .WithMany("Contributions")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Event", b =>
