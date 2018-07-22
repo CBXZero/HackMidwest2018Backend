@@ -25,13 +25,6 @@ namespace HackMidwest2018Backend.GraphQLModels
                     db.SaveChanges();
                     return ev;
                 });
-            
-            Field<ContactType>(
-                "createContact",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<ContactInputType>> { }
-                ),
-            )
         }
     }
 }
