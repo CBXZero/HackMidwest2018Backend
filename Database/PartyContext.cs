@@ -38,7 +38,7 @@ namespace HackMidwest2018Backend.DatabaseContext
             modelBuilder.Entity<Contribution>()
             .HasOne(p => p.Contributer)
             .WithMany(b => b.Contributions)
-            .HasForeignKey(p => p.ContributerContactId);
+            .IsRequired(false);
 
             modelBuilder.Entity<EventGuest>()
             .HasOne(p => p.Event)

@@ -54,6 +54,19 @@ namespace HackMidwest2018Backend.GraphQLModels
                     db.SaveChanges();
                     return ct;
                 });
+
+            Field<ListGraphType<EventGuestType>>(
+                "createEventGuests",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ListGraphType<EventGuestInputType>>> {Name = "eventGuest"}
+                ),
+                resolve: context => 
+                {
+                    var guests = context.GetArgument<List<EventGuest>>("eventGuest");
+                    db.EventGuests.AddRange(guests);
+                    db.SaveChanges();
+                    return guests;
+                });
         }
     }
 }
