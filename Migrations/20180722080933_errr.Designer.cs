@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackMidwest2018Backend.Migrations
 {
     [DbContext(typeof(PartyContext))]
-    [Migration("20180722073529_guest")]
-    partial class guest
+    [Migration("20180722080933_errr")]
+    partial class errr
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,7 +51,7 @@ namespace HackMidwest2018Backend.Migrations
                     b.Property<int>("ContributionId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Contributer");
+                    b.Property<int>("ContributerContactId");
 
                     b.Property<string>("Description");
 
@@ -59,12 +59,14 @@ namespace HackMidwest2018Backend.Migrations
 
                     b.HasKey("ContributionId");
 
+                    b.HasIndex("ContributerContactId");
+
                     b.HasIndex("EventId");
 
                     b.ToTable("Contributions");
 
                     b.HasData(
-                        new { ContributionId = 1, Description = "10 pounds of ground beef", EventId = 1 }
+                        new { ContributionId = 1, ContributerContactId = 1, Description = "10 pounds of ground beef", EventId = 1 }
                     );
                 });
 
@@ -147,12 +149,17 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-                        new { ScheduleId = 1, Chosen = false, EventDate = new DateTime(2018, 7, 22, 2, 35, 28, 965, DateTimeKind.Local), EventId = 1 }
+                        new { ScheduleId = 1, Chosen = false, EventDate = new DateTime(2018, 7, 22, 3, 9, 32, 906, DateTimeKind.Local), EventId = 1 }
                     );
                 });
 
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Contribution", b =>
                 {
+                    b.HasOne("HackMidwest2018Backend.DatabaseModels.Contact", "Contributer")
+                        .WithMany("Contributions")
+                        .HasForeignKey("ContributerContactId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("HackMidwest2018Backend.DatabaseModels.Event", "Event")
                         .WithMany("Contributions")
                         .HasForeignKey("EventId")

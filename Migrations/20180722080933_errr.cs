@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HackMidwest2018Backend.Migrations
 {
-    public partial class create : Migration
+    public partial class errr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,17 +57,50 @@ namespace HackMidwest2018Backend.Migrations
                     ContributionId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Description = table.Column<string>(nullable: true),
-                    Contributer = table.Column<string>(nullable: true),
+                    ContributerContactId = table.Column<int>(nullable: false),
                     EventId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contributions", x => x.ContributionId);
                     table.ForeignKey(
+                        name: "FK_Contributions_Contacts_ContributerContactId",
+                        column: x => x.ContributerContactId,
+                        principalTable: "Contacts",
+                        principalColumn: "ContactId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Contributions_Events_EventId",
                         column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "EventId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventGuests",
+                columns: table => new
+                {
+                    EventGuestId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    EventId = table.Column<int>(nullable: false),
+                    contactGuestId = table.Column<int>(nullable: false),
+                    Attending = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventGuests", x => x.EventGuestId);
+                    table.ForeignKey(
+                        name: "FK_EventGuests_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
+                        principalColumn: "EventId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EventGuests_Contacts_contactGuestId",
+                        column: x => x.contactGuestId,
+                        principalTable: "Contacts",
+                        principalColumn: "ContactId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -124,18 +157,53 @@ namespace HackMidwest2018Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Contributions",
-                columns: new[] { "ContributionId", "Contributer", "Description", "EventId" },
-                values: new object[] { 1, null, "10 pounds of ground beef", 1 });
+                columns: new[] { "ContributionId", "ContributerContactId", "Description", "EventId" },
+                values: new object[] { 1, 1, "10 pounds of ground beef", 1 });
+
+            migrationBuilder.InsertData(
+                table: "EventGuests",
+                columns: new[] { "EventGuestId", "Attending", "EventId", "contactGuestId" },
+                values: new object[] { 3, false, 2, 2 });
+
+            migrationBuilder.InsertData(
+                table: "EventGuests",
+                columns: new[] { "EventGuestId", "Attending", "EventId", "contactGuestId" },
+                values: new object[] { 1, false, 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "EventGuests",
+                columns: new[] { "EventGuestId", "Attending", "EventId", "contactGuestId" },
+                values: new object[] { 2, false, 3, 1 });
+
+            migrationBuilder.InsertData(
+                table: "EventGuests",
+                columns: new[] { "EventGuestId", "Attending", "EventId", "contactGuestId" },
+                values: new object[] { 4, false, 3, 2 });
 
             migrationBuilder.InsertData(
                 table: "Schedules",
                 columns: new[] { "ScheduleId", "Chosen", "EventDate", "EventId" },
-                values: new object[] { 1, false, new DateTime(2018, 7, 22, 0, 51, 46, 304, DateTimeKind.Local), 1 });
+                values: new object[] { 1, false, new DateTime(2018, 7, 22, 3, 9, 32, 906, DateTimeKind.Local), 1 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contributions_ContributerContactId",
+                table: "Contributions",
+                column: "ContributerContactId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contributions_EventId",
                 table: "Contributions",
                 column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventGuests_EventId",
+                table: "EventGuests",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventGuests_contactGuestId",
+                table: "EventGuests",
+                column: "contactGuestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_OwnerContactId",
@@ -152,6 +220,9 @@ namespace HackMidwest2018Backend.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Contributions");
+
+            migrationBuilder.DropTable(
+                name: "EventGuests");
 
             migrationBuilder.DropTable(
                 name: "Schedules");

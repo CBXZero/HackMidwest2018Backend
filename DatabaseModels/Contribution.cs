@@ -7,7 +7,9 @@ namespace HackMidwest2018Backend.DatabaseModels
     {
         public int ContributionId {get; set;}
         public string Description {get; set;}
-        public string Contributer {get; set;}
+
+        public int ContributerContactId {get; set;}
+        public Contact Contributer {get; set;}
 
         public int EventId {get; set;}
         public Event Event {get; set;}
