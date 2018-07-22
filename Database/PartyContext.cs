@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using HackMidwest2018Backend.DatabaseModels;
+using System;
 
 namespace HackMidwest2018Backend.DatabaseContext
 {
@@ -24,6 +25,13 @@ namespace HackMidwest2018Backend.DatabaseContext
                     FirstName = "Teddy",
                     LastName = "Ivarock",
                     PhoneNumber = "5555555555"
+                },
+                 new Contact
+                {
+                    ContactId = 2,
+                    FirstName = "Charlie L",
+                    LastName = "Ivarock",
+                    PhoneNumber = "5555555555"
                 }
             );
 
@@ -34,6 +42,21 @@ namespace HackMidwest2018Backend.DatabaseContext
                     Name = "Teddy's house warming",
                     Description = "I'm lonely and need a party",
                     OwnerContactId = 1
+                },
+                new Event
+                {
+                    EventId = 2,
+                    Name = "Charlie Board gaming",
+                    Description = "Party!",
+                    OwnerContactId = 2
+                }
+            );
+
+            modelBuilder.Entity<Schedule>().HasData(
+                new Schedule
+                {
+                    EventId = 1,
+                    EventDate = DateTime.Now
                 }
             );
         }

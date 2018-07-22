@@ -12,15 +12,15 @@ namespace HackMidwest2018Backend.GraphQLModels
         {
             var db = new PartyContext();
             Field<EventType>(
-          "event",
-          arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "eventId" }),
-          resolve: context =>
-          {
-              var id = context.GetArgument<int>("eventId");
-              var objectId = (int)context.Arguments["eventId"];
-              return db.Events.FirstOrDefault(e => e.EventId == objectId);
-          }
-        );
+                "event",
+                arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "eventId" }),
+                resolve: context =>
+                {
+                    var id = context.GetArgument<int>("eventId");
+                    var objectId = (int)context.Arguments["eventId"];
+                    return db.Events.FirstOrDefault(e => e.EventId == objectId);
+                }
+            );
 
             Field<ListGraphType<EventType>>(
               "events",
