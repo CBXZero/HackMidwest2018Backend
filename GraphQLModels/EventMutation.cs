@@ -24,7 +24,7 @@ namespace HackMidwest2018Backend.GraphQLModels
                     var ev = context.GetArgument<Event>("event");
                     var email = context.GetArgument<string>("email");
                     ev.Owner = db.Contacts.FirstOrDefault(c => c.Email == email);
-                    db.Events.Add(ev);
+                    db.Events.Add(ev); 
                     db.SaveChanges();
                     return ev;
                 });
