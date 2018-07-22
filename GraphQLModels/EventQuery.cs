@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using GraphQLModels;
 using HackMidwest2018Backend.DatabaseContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace HackMidwest2018Backend.GraphQLModels
 {
@@ -24,7 +25,8 @@ namespace HackMidwest2018Backend.GraphQLModels
 
             Field<ListGraphType<EventType>>(
               "events",
-              resolve: context => db.Events.ToList());
+              resolve: context => db.Events.Include(e => e.Owner).ToList()
+            );
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HackMidwest2018Backend.Migrations
 {
-    public partial class schUpdate : Migration
+    public partial class create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,7 +87,7 @@ namespace HackMidwest2018Backend.Migrations
             migrationBuilder.InsertData(
                 table: "Schedules",
                 columns: new[] { "ScheduleId", "EventDate", "EventId" },
-                values: new object[] { 1, new DateTime(2018, 7, 21, 19, 25, 57, 524, DateTimeKind.Local), 1 });
+                values: new object[] { 1, new DateTime(2018, 7, 21, 20, 59, 17, 716, DateTimeKind.Local), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_OwnerContactId",

@@ -18,6 +18,12 @@ namespace HackMidwest2018Backend.DatabaseContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Event>()
+            .HasOne(p => p.Owner)
+            .WithMany(b => b.OwnedEvents)
+            .HasForeignKey(p => p.OwnerContactId);
+
+            //Seeding database
             modelBuilder.Entity<Contact>().HasData(
                 new Contact
                 {
