@@ -19,7 +19,7 @@ namespace HackMidwest2018Backend.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]GraphQLRequest request)
         {
-            var schema = new Schema { Query = new EventQuery() };
+            var schema = new Schema { Query = new EventQuery(), Mutation = new EventMutation() };
 
             var result = await new DocumentExecuter().ExecuteAsync(_ =>
            {
