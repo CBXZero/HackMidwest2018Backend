@@ -56,13 +56,21 @@ namespace HackMidwest2018Backend.DatabaseContext
                     PhoneNumber = "5555555555",
                     Email = "ItsMeATeddy@gmail.com"
                 },
-                 new Contact
+                new Contact
                 {
                     ContactId = 2,
                     FirstName = "Charlie L",
                     LastName = "Ivarock",
                     PhoneNumber = "5555555555",
                     Email = "tripleTheCharliTripleTheFun@gmail.com"
+                },
+                new Contact 
+                {
+                    ContactId = 3,
+                    FirstName = "Charlie",
+                    LastName = "Besalke",
+                    PhoneNumber = "5555555555",
+                    Email = "cbesalke@gmail.com"
                 }
             );
 
@@ -80,6 +88,13 @@ namespace HackMidwest2018Backend.DatabaseContext
                     Title = "Charlie Board gaming",
                     Description = "Party!",
                     OwnerContactId = 2
+                },
+                new Event 
+                {
+                    EventId = 3,
+                    Title = "Charlie Cube Tournament!",
+                    Description = "Charlie will likely win!",
+                    OwnerContactId = 3
                 }
             );
 
