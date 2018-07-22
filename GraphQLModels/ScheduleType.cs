@@ -10,6 +10,7 @@ namespace GraphQLModels {
             Field(x => x.EventId);
             Field(x => x.EventDate);
             Field(x => x.Event, type: typeof(EventType));
+            Field(x => x.Chosen);
         }
     }
 }
