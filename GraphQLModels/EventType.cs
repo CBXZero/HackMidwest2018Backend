@@ -12,7 +12,10 @@ namespace GraphQLModels {
         Field(x => x.Name, nullable: true);
         Field(x => x.Description, nullable: true);
         Field(x =>  x.Owner, type: typeof(ContactType));
+<<<<<<< HEAD
         Field(x => x.Schedules, type: typeof(ListGraphType<ScheduleType>));
+=======
+>>>>>>> be93bab7a5f9152979b187846f753c3ea32a7220
       }
     }
 }

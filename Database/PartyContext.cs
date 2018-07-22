@@ -27,6 +27,10 @@ namespace HackMidwest2018Backend.DatabaseContext
             .HasOne(p => p.Event)
             .WithMany(b => b.Schedules)
             .HasForeignKey(p => p.EventId);
+            
+            modelBuilder.Entity<Event>()
+            .Property(e => e.EventId)
+            .ValueGeneratedOnAdd();
 
             //Seeding database
             modelBuilder.Entity<Contact>().HasData(

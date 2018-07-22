@@ -3,14 +3,16 @@ using System;
 using HackMidwest2018Backend.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HackMidwest2018Backend.Migrations
 {
     [DbContext(typeof(PartyContext))]
-    partial class PartyContextModelSnapshot : ModelSnapshot
+    [Migration("20180722024602_create")]
+    partial class create
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,11 +82,7 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-<<<<<<< HEAD
-                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 21, 54, 57, 225, DateTimeKind.Local), EventId = 1 }
-=======
                         new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 21, 46, 1, 815, DateTimeKind.Local), EventId = 1 }
->>>>>>> be93bab7a5f9152979b187846f753c3ea32a7220
                     );
                 });
 
