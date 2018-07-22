@@ -58,17 +58,18 @@ namespace HackMidwest2018Backend.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Description = table.Column<string>(nullable: true),
                     ContributerContactId = table.Column<int>(nullable: false),
+                    ContributerContactId1 = table.Column<int>(nullable: true),
                     EventId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contributions", x => x.ContributionId);
                     table.ForeignKey(
-                        name: "FK_Contributions_Contacts_ContributerContactId",
-                        column: x => x.ContributerContactId,
+                        name: "FK_Contributions_Contacts_ContributerContactId1",
+                        column: x => x.ContributerContactId1,
                         principalTable: "Contacts",
                         principalColumn: "ContactId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Contributions_Events_EventId",
                         column: x => x.EventId,
@@ -157,8 +158,8 @@ namespace HackMidwest2018Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Contributions",
-                columns: new[] { "ContributionId", "ContributerContactId", "Description", "EventId" },
-                values: new object[] { 1, 1, "10 pounds of ground beef", 1 });
+                columns: new[] { "ContributionId", "ContributerContactId", "ContributerContactId1", "Description", "EventId" },
+                values: new object[] { 1, 1, null, "10 pounds of ground beef", 1 });
 
             migrationBuilder.InsertData(
                 table: "EventGuests",
@@ -183,12 +184,12 @@ namespace HackMidwest2018Backend.Migrations
             migrationBuilder.InsertData(
                 table: "Schedules",
                 columns: new[] { "ScheduleId", "Chosen", "EventDate", "EventId" },
-                values: new object[] { 1, false, new DateTime(2018, 7, 22, 3, 9, 32, 906, DateTimeKind.Local), 1 });
+                values: new object[] { 1, false, new DateTime(2018, 7, 22, 3, 46, 16, 519, DateTimeKind.Local), 1 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contributions_ContributerContactId",
+                name: "IX_Contributions_ContributerContactId1",
                 table: "Contributions",
-                column: "ContributerContactId");
+                column: "ContributerContactId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contributions_EventId",

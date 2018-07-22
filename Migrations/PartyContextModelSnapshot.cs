@@ -51,13 +51,15 @@ namespace HackMidwest2018Backend.Migrations
 
                     b.Property<int>("ContributerContactId");
 
+                    b.Property<int?>("ContributerContactId1");
+
                     b.Property<string>("Description");
 
                     b.Property<int>("EventId");
 
                     b.HasKey("ContributionId");
 
-                    b.HasIndex("ContributerContactId");
+                    b.HasIndex("ContributerContactId1");
 
                     b.HasIndex("EventId");
 
@@ -147,7 +149,7 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-                        new { ScheduleId = 1, Chosen = false, EventDate = new DateTime(2018, 7, 22, 3, 9, 32, 906, DateTimeKind.Local), EventId = 1 }
+                        new { ScheduleId = 1, Chosen = false, EventDate = new DateTime(2018, 7, 22, 3, 46, 16, 519, DateTimeKind.Local), EventId = 1 }
                     );
                 });
 
@@ -155,8 +157,7 @@ namespace HackMidwest2018Backend.Migrations
                 {
                     b.HasOne("HackMidwest2018Backend.DatabaseModels.Contact", "Contributer")
                         .WithMany("Contributions")
-                        .HasForeignKey("ContributerContactId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ContributerContactId1");
 
                     b.HasOne("HackMidwest2018Backend.DatabaseModels.Event", "Event")
                         .WithMany("Contributions")
