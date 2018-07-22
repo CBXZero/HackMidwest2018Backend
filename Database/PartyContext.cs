@@ -61,14 +61,14 @@ namespace HackMidwest2018Backend.DatabaseContext
                 new Event
                 {
                     EventId = 2,
-                    Name = "Teddy's house warming",
+                    Title = "Teddy's house warming",
                     Description = "I'm lonely and need a party",
                     OwnerContactId = 1,
                 },
                 new Event
                 {
                     EventId = 1,
-                    Name = "Charlie Board gaming",
+                    Title = "Charlie Board gaming",
                     Description = "Party!",
                     OwnerContactId = 2
                 }

@@ -7,8 +7,19 @@ public class EventInputType : InputObjectGraphType
     public EventInputType()
     {
         Name = "EventInput";
-        Field<NonNullGraphType<StringGraphType>>("title");
+        Field<NonNullGraphType<StringGraphType>>("name");
         Field<StringGraphType>("description");
-        Field<NonNullGraphType<ContactType>>("owner");
+        Field<NonNullGraphType<ContactInputType>>("owner");
+    }
+}
+
+public class ContactInputType : InputObjectGraphType
+{
+    public ContactInputType()
+    {
+        Name = "ContactInput";
+        Field<NonNullGraphType<StringGraphType>>("FirstName");
+        Field<StringGraphType>("LastName");
+        Field<NonNullGraphType<StringGraphType>>("Email");
     }
 }

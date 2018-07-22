@@ -9,7 +9,7 @@ namespace GraphQLModels {
       public EventType()
       {
         Field(x => x.EventId);
-        Field(x => x.Name, nullable: true).Name("title");
+        Field(x => x.Title, nullable: true);
         Field(x => x.Description, nullable: true);
         Field(x =>  x.Owner, type: typeof(ContactType));
         Field(x => x.Schedules, type: typeof(ListGraphType<ScheduleType>));
