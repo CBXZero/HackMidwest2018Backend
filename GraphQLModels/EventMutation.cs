@@ -28,6 +28,19 @@ namespace HackMidwest2018Backend.GraphQLModels
                     db.SaveChanges();
                     return ev;
                 });
+
+            Field<ListGraphType<ContrubutionType>>(
+                "createContributions",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ListGraphType<ContributionInputType>>> {Name = "contributions"}
+                ),
+                resolve: context =>
+                {
+                    var contributions = context.GetArgument<List<Contribution>>("contributions");
+                    db.Contributions.AddRange(contributions);
+                    db.SaveChanges();
+                    return contributions;
+                });
             
             Field<ContactType>(
                 "createContact",
