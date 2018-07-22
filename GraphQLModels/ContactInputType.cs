@@ -1,4 +1,5 @@
 using GraphQL.Types;
+using GraphQLModels;
 using HackMidwest2018Backend.DatabaseModels;
 
 public class ContactInputType : InputObjectGraphType

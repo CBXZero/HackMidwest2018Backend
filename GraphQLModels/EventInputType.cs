@@ -10,5 +10,6 @@ public class EventInputType : InputObjectGraphType
         Field<NonNullGraphType<StringGraphType>>("title");
         Field<StringGraphType>("description");
         Field<NonNullGraphType<ContactInputType>>("owner");
+        Field<ListGraphType<ScheduleInputType>>("Schedules");
     }
 }
