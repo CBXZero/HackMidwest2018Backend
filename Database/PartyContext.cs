@@ -11,6 +11,7 @@ namespace HackMidwest2018Backend.DatabaseContext
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Contribution> Contributions {get; set;}
+        public DbSet<EventGuest> EventGuests {get; set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +35,16 @@ namespace HackMidwest2018Backend.DatabaseContext
             .WithMany(b => b.Contributions)
             .HasForeignKey(p => p.EventId);
 
+            modelBuilder.Entity<EventGuest>()
+            .HasOne(p => p.Event)
+            .WithMany(b => b.EventGuests)
+            .HasForeignKey(p => p.EventId);
+
+            modelBuilder.Entity<EventGuest>()
+            .HasOne(p => p.Guest)
+            .WithMany(b => b.GuestEvents)
+            .HasForeignKey(p => p.contactGuestId);
+
             modelBuilder.Entity<Event>()
             .Property(e => e.EventId)
             .ValueGeneratedOnAdd();
@@ -42,9 +53,18 @@ namespace HackMidwest2018Backend.DatabaseContext
             .Property(e => e.ContactId)
             .ValueGeneratedOnAdd();
 
+            modelBuilder.Entity<Schedule>()
+            .Property(e => e.ScheduleId)
+            .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Contribution>()
+            .Property(e => e.ContributionId)
+            .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<Contact>()
             .HasAlternateKey(p => p.Email)
             .HasName("AltKey_Contact_Email");
+
 
             //Seeding database
             modelBuilder.Entity<Contact>().HasData(
@@ -95,6 +115,29 @@ namespace HackMidwest2018Backend.DatabaseContext
                     Title = "Charlie Cube Tournament!",
                     Description = "Charlie will likely win!",
                     OwnerContactId = 3
+                }
+            );
+
+            modelBuilder.Entity<EventGuest>().HasData(
+                new EventGuest{
+                    EventGuestId = 1,
+                    EventId = 1,
+                    contactGuestId = 1
+                },
+                new EventGuest{
+                    EventGuestId = 2,
+                    EventId = 3,
+                    contactGuestId = 1
+                },
+                new EventGuest{
+                    EventGuestId = 3,
+                    EventId = 2,
+                    contactGuestId = 2
+                },
+                new EventGuest{
+                    EventGuestId = 4,
+                    EventId = 3,
+                    contactGuestId = 2
                 }
             );
 

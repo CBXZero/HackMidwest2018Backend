@@ -24,16 +24,20 @@ namespace HackMidwest2018Backend.GraphQLModels
                         var id = (int)context.Arguments["id"];
 
                         return db.Events
+                            .Include(e => e.Contributions).Where(e => e.EventId == id)
                             .Include(e => e.Owner)
                             .Include(e => e.Schedules)
-                            .Include(e => e.Contributions).Where(e => e.EventId == id);
+                            .Include(p => p.EventGuests)
+                            .ThenInclude(p => p.Guest);
                     }
 
                     var email = (string)context.Arguments["email"];
                     return db.Events
                     .Include(e => e.Owner)
                     .Include(e => e.Schedules)
-                    .Include(e => e.Contributions).Where(e => e.Owner.Email == email);
+                    .Include(e => e.Contributions).Where(e => e.Owner.Email == email)
+                    .Include(p => p.EventGuests)
+                    .ThenInclude(p => p.Guest);
                 }
             );
 
@@ -43,6 +47,8 @@ namespace HackMidwest2018Backend.GraphQLModels
                 .Include(e => e.Owner)
                 .Include(e => e.Schedules)
                 .Include(e => e.Contributions)
+                .Include(p => p.EventGuests)
+                .ThenInclude(p => p.Guest)
                 .ToList()
             );
 
@@ -57,6 +63,8 @@ namespace HackMidwest2018Backend.GraphQLModels
                          .ThenInclude(t => t.Contributions)
                          .Include(t => t.OwnedEvents)
                          .ThenInclude(p => p.Schedules)
+                         .Include(p => p.GuestEvents)
+                         .ThenInclude(p => p.Event)
                          .FirstOrDefault(c => c.Email == objectId);
                  }
             );
