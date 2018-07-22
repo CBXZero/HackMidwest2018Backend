@@ -25,7 +25,7 @@ namespace HackMidwest2018Backend.GraphQLModels
 
             Field<ListGraphType<EventType>>(
               "events",
-              resolve: context => db.Events.Include(e => e.Owner).ToList()
+              resolve: context => db.Events.Include(e => e.Owner).Include(e => e.Schedules).ToList()
             );
         }
     }

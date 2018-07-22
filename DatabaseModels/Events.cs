@@ -12,8 +12,7 @@ namespace HackMidwest2018Backend.DatabaseModels
         public int OwnerContactId {get; set;}
 
         public Contact Owner {get; set;}
-
-        public int ScheduleId {get; set;}
-        public ICollection<Schedule> Schedules {get; set;}
+        
+        public List<Schedule> Schedules {get; set;}
     }
 }
