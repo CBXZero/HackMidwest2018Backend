@@ -55,6 +55,7 @@ namespace HackMidwest2018Backend.DatabaseContext
             modelBuilder.Entity<Schedule>().HasData(
                 new Schedule
                 {
+                    ScheduleId = 1,
                     EventId = 1,
                     EventDate = DateTime.Now
                 }

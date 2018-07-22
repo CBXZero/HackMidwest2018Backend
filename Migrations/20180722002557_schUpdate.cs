@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HackMidwest2018Backend.Migrations
 {
-    public partial class FirstCreate : Migration
+    public partial class schUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,6 +50,7 @@ namespace HackMidwest2018Backend.Migrations
                 {
                     ScheduleId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    EventDate = table.Column<DateTime>(nullable: false),
                     EventId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -68,9 +70,24 @@ namespace HackMidwest2018Backend.Migrations
                 values: new object[] { 1, null, "Teddy", "Ivarock", "5555555555" });
 
             migrationBuilder.InsertData(
+                table: "Contacts",
+                columns: new[] { "ContactId", "Email", "FirstName", "LastName", "PhoneNumber" },
+                values: new object[] { 2, null, "Charlie L", "Ivarock", "5555555555" });
+
+            migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "EventId", "Description", "Name", "OwnerContactId" },
                 values: new object[] { 1, "I'm lonely and need a party", "Teddy's house warming", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Events",
+                columns: new[] { "EventId", "Description", "Name", "OwnerContactId" },
+                values: new object[] { 2, "Party!", "Charlie Board gaming", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Schedules",
+                columns: new[] { "ScheduleId", "EventDate", "EventId" },
+                values: new object[] { 1, new DateTime(2018, 7, 21, 19, 25, 57, 524, DateTimeKind.Local), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_OwnerContactId",
