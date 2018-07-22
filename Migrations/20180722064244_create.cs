@@ -130,7 +130,7 @@ namespace HackMidwest2018Backend.Migrations
             migrationBuilder.InsertData(
                 table: "Schedules",
                 columns: new[] { "ScheduleId", "Chosen", "EventDate", "EventId" },
-                values: new object[] { 1, false, new DateTime(2018, 7, 22, 0, 51, 46, 304, DateTimeKind.Local), 1 });
+                values: new object[] { 1, false, new DateTime(2018, 7, 22, 1, 42, 44, 263, DateTimeKind.Local), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contributions_EventId",
