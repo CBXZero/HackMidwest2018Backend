@@ -22,4 +22,4 @@ public class ContactInputType : InputObjectGraphType
         Field<StringGraphType>("LastName");
         Field<NonNullGraphType<StringGraphType>>("Email");
     }
-}
+} 
