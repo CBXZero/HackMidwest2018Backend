@@ -7,7 +7,7 @@ using HackMidwest2018Backend.DatabaseContext;
 
 namespace HackMidwest2018Backend.GraphQLModels
 {
-    public class EventMutation : ObjectGraphType<object>
+    public class EventMutation : ObjectGraphType
     {
         public EventMutation()
         {
