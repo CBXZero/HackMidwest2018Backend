@@ -16,12 +16,15 @@ namespace HackMidwest2018Backend.GraphQLModels
             Field<EventType>(
                 "createEvent",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<EventInputType>> {Name = "event"}
+                    new QueryArgument<NonNullGraphType<EventInputType>> {Name = "event"},
+                    new QueryArgument<NonNullGraphType<StringGraphType>> {Name = "email"}
                 ),
                 resolve: context =>
                 {
                     var ev = context.GetArgument<Event>("event");
-                    db.Events.Add(ev);
+                    var email = context.GetArgument<string>("email");
+                    ev.Owner = db.Contacts.FirstOrDefault(c => c.Email == email);
+                    db.Events.Add(ev); 
                     db.SaveChanges();
                     return ev;
                 });
