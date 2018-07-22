@@ -39,6 +39,10 @@ namespace HackMidwest2018Backend.DatabaseContext
             .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Contact>()
+            .Property(e => e.ContactId)
+            .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Contact>()
             .HasAlternateKey(p => p.Email)
             .HasName("AltKey_Contact_Email");
 

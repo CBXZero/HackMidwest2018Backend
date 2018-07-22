@@ -7,7 +7,8 @@ public class ContactInputType : InputObjectGraphType
     {
         Name = "ContactInput";
         Field<NonNullGraphType<StringGraphType>>("FirstName");
-        Field<StringGraphType>("LastName");
+        Field<NonNullGraphType<StringGraphType>>("LastName");
         Field<NonNullGraphType<StringGraphType>>("Email");
+        Field<NonNullGraphType<StringGraphType>>("PhoneNumber");
     }
 } 

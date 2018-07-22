@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackMidwest2018Backend.Migrations
 {
     [DbContext(typeof(PartyContext))]
-    [Migration("20180722042630_create")]
+    [Migration("20180722050447_create")]
     partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,7 +106,7 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 23, 26, 30, 119, DateTimeKind.Local), EventId = 1 }
+                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 22, 0, 4, 47, 550, DateTimeKind.Local), EventId = 1 }
                     );
                 });
 
