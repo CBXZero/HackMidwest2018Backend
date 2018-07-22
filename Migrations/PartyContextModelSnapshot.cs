@@ -78,14 +78,14 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 19, 25, 57, 524, DateTimeKind.Local), EventId = 1 }
+                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 20, 59, 17, 716, DateTimeKind.Local), EventId = 1 }
                     );
                 });
 
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Event", b =>
                 {
                     b.HasOne("HackMidwest2018Backend.DatabaseModels.Contact", "Owner")
-                        .WithMany()
+                        .WithMany("OwnedEvents")
                         .HasForeignKey("OwnerContactId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -93,7 +93,7 @@ namespace HackMidwest2018Backend.Migrations
             modelBuilder.Entity("HackMidwest2018Backend.DatabaseModels.Schedule", b =>
                 {
                     b.HasOne("HackMidwest2018Backend.DatabaseModels.Event", "Event")
-                        .WithMany("Schedules")
+                        .WithMany()
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

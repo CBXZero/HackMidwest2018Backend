@@ -10,7 +10,7 @@ namespace GraphQLModels {
         Field(x => x.EventId);
         Field(x => x.Name, nullable: true);
         Field(x => x.Description, nullable: true);
-        //Field(x => x.Owner);
+        Field(x =>  x.Owner, type: typeof(ContactType));
       }
     }
 }

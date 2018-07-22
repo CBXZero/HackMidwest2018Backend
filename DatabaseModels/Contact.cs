@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace HackMidwest2018Backend.DatabaseModels
 {
     public class Contact
@@ -7,5 +10,7 @@ namespace HackMidwest2018Backend.DatabaseModels
         public string LastName {get; set;}
         public string PhoneNumber {get; set;}
         public string Email {get; set;}
+
+        public List<Event> OwnedEvents {get; set;}
     }
 }

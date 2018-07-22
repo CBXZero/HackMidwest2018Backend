@@ -5,7 +5,7 @@ using HackMidwest2018Backend.DatabaseContext;
 namespace GraphQLModels {
     public class ContactType : ObjectGraphType<Contact>
     {
-        public ContactType(PartyContext context)
+        public ContactType()
         {
             Field(x => x.FirstName);
             Field(x => x.LastName);
