@@ -13,6 +13,7 @@ namespace GraphQLModels {
             Field(x => x.ContactId);
             Field(x => x.Email);
             Field(x => x.OwnedEvents, type: typeof(ListGraphType<EventType>));
+            Field(x => x.GuestEvents, type: typeof(ListGraphType<EventGuestType>));
         }
     }
 }
