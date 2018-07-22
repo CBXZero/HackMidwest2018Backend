@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackMidwest2018Backend.Migrations
 {
     [DbContext(typeof(PartyContext))]
-    [Migration("20180722053517_create")]
+    [Migration("20180722055146_create")]
     partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,8 @@ namespace HackMidwest2018Backend.Migrations
 
                     b.HasData(
                         new { ContactId = 1, Email = "ItsMeATeddy@gmail.com", FirstName = "Teddy", LastName = "Ivarock", PhoneNumber = "5555555555" },
-                        new { ContactId = 2, Email = "tripleTheCharliTripleTheFun@gmail.com", FirstName = "Charlie L", LastName = "Ivarock", PhoneNumber = "5555555555" }
+                        new { ContactId = 2, Email = "tripleTheCharliTripleTheFun@gmail.com", FirstName = "Charlie L", LastName = "Ivarock", PhoneNumber = "5555555555" },
+                        new { ContactId = 3, Email = "cbesalke@gmail.com", FirstName = "Charlie", LastName = "Besalke", PhoneNumber = "5555555555" }
                     );
                 });
 
@@ -96,7 +97,8 @@ namespace HackMidwest2018Backend.Migrations
 
                     b.HasData(
                         new { EventId = 2, BringAFriend = false, Description = "I'm lonely and need a party", OwnerContactId = 1, PublicEvent = false, Title = "Teddy's house warming" },
-                        new { EventId = 1, BringAFriend = false, Description = "Party!", OwnerContactId = 2, PublicEvent = false, Title = "Charlie Board gaming" }
+                        new { EventId = 1, BringAFriend = false, Description = "Party!", OwnerContactId = 2, PublicEvent = false, Title = "Charlie Board gaming" },
+                        new { EventId = 3, BringAFriend = false, Description = "Charlie will likely win!", OwnerContactId = 3, PublicEvent = false, Title = "Charlie Cube Tournament!" }
                     );
                 });
 
@@ -118,7 +120,7 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-                        new { ScheduleId = 1, Chosen = false, EventDate = new DateTime(2018, 7, 22, 0, 35, 17, 138, DateTimeKind.Local), EventId = 1 }
+                        new { ScheduleId = 1, Chosen = false, EventDate = new DateTime(2018, 7, 22, 0, 51, 46, 304, DateTimeKind.Local), EventId = 1 }
                     );
                 });
 
