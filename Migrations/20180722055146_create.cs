@@ -103,6 +103,11 @@ namespace HackMidwest2018Backend.Migrations
                 values: new object[] { 2, "tripleTheCharliTripleTheFun@gmail.com", "Charlie L", "Ivarock", "5555555555" });
 
             migrationBuilder.InsertData(
+                table: "Contacts",
+                columns: new[] { "ContactId", "Email", "FirstName", "LastName", "PhoneNumber" },
+                values: new object[] { 3, "cbesalke@gmail.com", "Charlie", "Besalke", "5555555555" });
+
+            migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "EventId", "BringAFriend", "Description", "DressCode", "Location", "OwnerContactId", "PublicEvent", "Title", "Website" },
                 values: new object[] { 2, false, "I'm lonely and need a party", null, null, 1, false, "Teddy's house warming", null });
@@ -113,6 +118,11 @@ namespace HackMidwest2018Backend.Migrations
                 values: new object[] { 1, false, "Party!", null, null, 2, false, "Charlie Board gaming", null });
 
             migrationBuilder.InsertData(
+                table: "Events",
+                columns: new[] { "EventId", "BringAFriend", "Description", "DressCode", "Location", "OwnerContactId", "PublicEvent", "Title", "Website" },
+                values: new object[] { 3, false, "Charlie will likely win!", null, null, 3, false, "Charlie Cube Tournament!", null });
+
+            migrationBuilder.InsertData(
                 table: "Contributions",
                 columns: new[] { "ContributionId", "Contributer", "Description", "EventId" },
                 values: new object[] { 1, null, "10 pounds of ground beef", 1 });
@@ -120,7 +130,7 @@ namespace HackMidwest2018Backend.Migrations
             migrationBuilder.InsertData(
                 table: "Schedules",
                 columns: new[] { "ScheduleId", "Chosen", "EventDate", "EventId" },
-                values: new object[] { 1, false, new DateTime(2018, 7, 22, 0, 35, 17, 138, DateTimeKind.Local), 1 });
+                values: new object[] { 1, false, new DateTime(2018, 7, 22, 0, 51, 46, 304, DateTimeKind.Local), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contributions_EventId",

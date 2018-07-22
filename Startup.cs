@@ -41,7 +41,7 @@ namespace HackMidwest2018Backend
             {
                 app.UseHsts();
             }
-
+            app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseGraphiQl("api/graphql");
             app.UseHttpsRedirection();
             app.UseMvc();
