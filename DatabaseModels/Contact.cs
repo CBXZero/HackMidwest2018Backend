@@ -12,5 +12,6 @@ namespace HackMidwest2018Backend.DatabaseModels
         public string Email {get; set;}
         public List<Event> OwnedEvents {get; set;}
         public List<EventGuest> GuestEvents {get; set;}
+        public List<Contribution> Contributions {get; set;}
     }
 }

@@ -35,6 +35,11 @@ namespace HackMidwest2018Backend.DatabaseContext
             .WithMany(b => b.Contributions)
             .HasForeignKey(p => p.EventId);
 
+            modelBuilder.Entity<Contribution>()
+            .HasOne(p => p.Contributer)
+            .WithMany(b => b.Contributions)
+            .HasForeignKey(p => p.ContributerContactId);
+
             modelBuilder.Entity<EventGuest>()
             .HasOne(p => p.Event)
             .WithMany(b => b.EventGuests)
@@ -155,7 +160,8 @@ namespace HackMidwest2018Backend.DatabaseContext
                 {
                     ContributionId = 1,
                     EventId = 1,
-                    Description = "10 pounds of ground beef"
+                    Description = "10 pounds of ground beef",
+                    ContributerContactId = 1
                 }
             );
         }
