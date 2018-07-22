@@ -12,14 +12,3 @@ public class EventInputType : InputObjectGraphType
         Field<NonNullGraphType<ContactInputType>>("owner");
     }
 }
-
-public class ContactInputType : InputObjectGraphType
-{
-    public ContactInputType()
-    {
-        Name = "ContactInput";
-        Field<NonNullGraphType<StringGraphType>>("FirstName");
-        Field<StringGraphType>("LastName");
-        Field<NonNullGraphType<StringGraphType>>("Email");
-    }
-} 
