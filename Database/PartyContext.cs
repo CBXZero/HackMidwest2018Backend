@@ -23,6 +23,11 @@ namespace HackMidwest2018Backend.DatabaseContext
             .WithMany(b => b.OwnedEvents)
             .HasForeignKey(p => p.OwnerContactId);
 
+            modelBuilder.Entity<Schedule>()
+            .HasOne(p => p.Event)
+            .WithMany(b => b.Schedules)
+            .HasForeignKey(p => p.EventId);
+
             //Seeding database
             modelBuilder.Entity<Contact>().HasData(
                 new Contact
@@ -47,7 +52,7 @@ namespace HackMidwest2018Backend.DatabaseContext
                     EventId = 1,
                     Name = "Teddy's house warming",
                     Description = "I'm lonely and need a party",
-                    OwnerContactId = 1
+                    OwnerContactId = 1,
                 },
                 new Event
                 {
