@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackMidwest2018Backend.Migrations
 {
     [DbContext(typeof(PartyContext))]
-    [Migration("20180722034335_create")]
+    [Migration("20180722042630_create")]
     partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,8 @@ namespace HackMidwest2018Backend.Migrations
                     b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
                     b.Property<string>("FirstName");
 
@@ -33,10 +34,13 @@ namespace HackMidwest2018Backend.Migrations
 
                     b.HasKey("ContactId");
 
+                    b.HasAlternateKey("Email")
+                        .HasName("AltKey_Contact_Email");
+
                     b.ToTable("Contacts");
 
                     b.HasData(
-                        new { ContactId = 1, FirstName = "Teddy", LastName = "Ivarock", PhoneNumber = "5555555555" },
+                        new { ContactId = 1, Email = "ItsMeATeddy@gmail.com", FirstName = "Teddy", LastName = "Ivarock", PhoneNumber = "5555555555" },
                         new { ContactId = 2, Email = "tripleTheCharliTripleTheFun@gmail.com", FirstName = "Charlie L", LastName = "Ivarock", PhoneNumber = "5555555555" }
                     );
                 });
@@ -70,9 +74,9 @@ namespace HackMidwest2018Backend.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Name");
-
                     b.Property<int>("OwnerContactId");
+
+                    b.Property<string>("Title");
 
                     b.HasKey("EventId");
 
@@ -81,8 +85,8 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Events");
 
                     b.HasData(
-                        new { EventId = 2, Description = "I'm lonely and need a party", Name = "Teddy's house warming", OwnerContactId = 1 },
-                        new { EventId = 1, Description = "Party!", Name = "Charlie Board gaming", OwnerContactId = 2 }
+                        new { EventId = 2, Description = "I'm lonely and need a party", OwnerContactId = 1, Title = "Teddy's house warming" },
+                        new { EventId = 1, Description = "Party!", OwnerContactId = 2, Title = "Charlie Board gaming" }
                     );
                 });
 
@@ -102,7 +106,7 @@ namespace HackMidwest2018Backend.Migrations
                     b.ToTable("Schedules");
 
                     b.HasData(
-                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 22, 43, 35, 753, DateTimeKind.Local), EventId = 1 }
+                        new { ScheduleId = 1, EventDate = new DateTime(2018, 7, 21, 23, 26, 30, 119, DateTimeKind.Local), EventId = 1 }
                     );
                 });
 

@@ -16,11 +16,12 @@ namespace HackMidwest2018Backend.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contacts", x => x.ContactId);
+                    table.UniqueConstraint("AltKey_Contact_Email", x => x.Email);
                 });
 
             migrationBuilder.CreateTable(
@@ -29,7 +30,7 @@ namespace HackMidwest2018Backend.Migrations
                 {
                     EventId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     OwnerContactId = table.Column<int>(nullable: false)
                 },
@@ -88,7 +89,7 @@ namespace HackMidwest2018Backend.Migrations
             migrationBuilder.InsertData(
                 table: "Contacts",
                 columns: new[] { "ContactId", "Email", "FirstName", "LastName", "PhoneNumber" },
-                values: new object[] { 1, null, "Teddy", "Ivarock", "5555555555" });
+                values: new object[] { 1, "ItsMeATeddy@gmail.com", "Teddy", "Ivarock", "5555555555" });
 
             migrationBuilder.InsertData(
                 table: "Contacts",
@@ -97,13 +98,13 @@ namespace HackMidwest2018Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Description", "Name", "OwnerContactId" },
-                values: new object[] { 2, "I'm lonely and need a party", "Teddy's house warming", 1 });
+                columns: new[] { "EventId", "Description", "OwnerContactId", "Title" },
+                values: new object[] { 2, "I'm lonely and need a party", 1, "Teddy's house warming" });
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Description", "Name", "OwnerContactId" },
-                values: new object[] { 1, "Party!", "Charlie Board gaming", 2 });
+                columns: new[] { "EventId", "Description", "OwnerContactId", "Title" },
+                values: new object[] { 1, "Party!", 2, "Charlie Board gaming" });
 
             migrationBuilder.InsertData(
                 table: "Contributions",
@@ -113,7 +114,7 @@ namespace HackMidwest2018Backend.Migrations
             migrationBuilder.InsertData(
                 table: "Schedules",
                 columns: new[] { "ScheduleId", "EventDate", "EventId" },
-                values: new object[] { 1, new DateTime(2018, 7, 21, 22, 43, 35, 753, DateTimeKind.Local), 1 });
+                values: new object[] { 1, new DateTime(2018, 7, 21, 23, 26, 30, 119, DateTimeKind.Local), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contributions_EventId",

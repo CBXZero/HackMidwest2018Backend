@@ -38,6 +38,10 @@ namespace HackMidwest2018Backend.DatabaseContext
             .Property(e => e.EventId)
             .ValueGeneratedOnAdd();
 
+            modelBuilder.Entity<Contact>()
+            .HasAlternateKey(p => p.Email)
+            .HasName("AltKey_Contact_Email");
+
             //Seeding database
             modelBuilder.Entity<Contact>().HasData(
                 new Contact
@@ -45,7 +49,8 @@ namespace HackMidwest2018Backend.DatabaseContext
                     ContactId = 1,
                     FirstName = "Teddy",
                     LastName = "Ivarock",
-                    PhoneNumber = "5555555555"
+                    PhoneNumber = "5555555555",
+                    Email = "ItsMeATeddy@gmail.com"
                 },
                  new Contact
                 {
