@@ -10,5 +10,6 @@ namespace HackMidwest2018Backend.DatabaseModels
         public string Description {get; set;}
         public int OwnerContactId {get; set;}
         public Contact Owner {get; set;}
+        public ICollection<Schedule> Schedules {get; set;}
     }
 }

@@ -2,7 +2,7 @@
 
 namespace HackMidwest2018Backend.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class FirstCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,8 +49,7 @@ namespace HackMidwest2018Backend.Migrations
                 {
                     ScheduleId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    EventId = table.Column<int>(nullable: true),
-                    ScheduleId1 = table.Column<int>(nullable: true)
+                    EventId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,14 +59,18 @@ namespace HackMidwest2018Backend.Migrations
                         column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "EventId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Schedules_Schedules_ScheduleId1",
-                        column: x => x.ScheduleId1,
-                        principalTable: "Schedules",
-                        principalColumn: "ScheduleId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Contacts",
+                columns: new[] { "ContactId", "Email", "FirstName", "LastName", "PhoneNumber" },
+                values: new object[] { 1, null, "Teddy", "Ivarock", "5555555555" });
+
+            migrationBuilder.InsertData(
+                table: "Events",
+                columns: new[] { "EventId", "Description", "Name", "OwnerContactId" },
+                values: new object[] { 1, "I'm lonely and need a party", "Teddy's house warming", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_OwnerContactId",
@@ -78,11 +81,6 @@ namespace HackMidwest2018Backend.Migrations
                 name: "IX_Schedules_EventId",
                 table: "Schedules",
                 column: "EventId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Schedules_ScheduleId1",
-                table: "Schedules",
-                column: "ScheduleId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
